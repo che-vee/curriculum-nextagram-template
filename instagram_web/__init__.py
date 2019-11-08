@@ -1,11 +1,15 @@
 from app import app
 from flask import render_template
+from flask_wtf.csrf import CSRFProtect
+
 from instagram_web.blueprints.users.views import users_blueprint
 from flask_assets import Environment, Bundle
 from .util.assets import bundles
 
 assets = Environment(app)
 assets.register(bundles)
+
+csrf = CSRFProtect(app)
 
 app.register_blueprint(users_blueprint, url_prefix="/users")
 
