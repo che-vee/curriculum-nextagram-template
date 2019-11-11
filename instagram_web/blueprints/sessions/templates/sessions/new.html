@@ -1,0 +1,58 @@
+{% extends '_layout.html'%} {% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-sm-4">
+    <div class="card">
+      <header class="card-header">
+        <a
+          href="{{ url_for('users.new') }}"
+          class="float-right btn btn-outline-primary"
+          >Sign up</a
+        >
+        <h4 class="card-title mt-2">Sign in</h4>
+      </header>
+      <article class="card-body">
+        <form action="{{ url_for('sessions.create') }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input
+              value="{{ username }}"
+              name="username"
+              class="form-control"
+              placeholder="Enter your username"
+              type="text"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group">
+            <a class="float-right" href="#">Forgot?</a>
+            <label for="password">Password</label>
+            <input
+              class="form-control"
+              placeholder="******"
+              type="password"
+              name="password"
+            />
+          </div>
+          <!-- form-group// -->
+          <div class="form-group">
+            <div class="checkbox">
+              <label> <input type="checkbox" /> Save password </label>
+            </div>
+            <!-- checkbox .// -->
+          </div>
+          <!-- form-group// -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Login
+            </button>
+          </div>
+          <!-- form-group// -->
+        </form>
+      </article>
+    </div>
+    <!-- card.// -->
+  </div>
+</div>
+{% endblock%}
