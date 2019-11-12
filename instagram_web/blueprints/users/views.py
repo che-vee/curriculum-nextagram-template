@@ -1,6 +1,7 @@
 import re
 
 from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask_login import login_required, current_user
 from models.user import User
 from werkzeug.security import generate_password_hash
 
@@ -48,10 +49,35 @@ def index():
 
 
 @users_blueprint.route('/<id>/edit', methods=['GET'])
+@login_required
 def edit(id):
-    pass
+    user = User[id]
+    if current_user == user:
+        return render_template('users/edit.html', user=user)
+    # else: 
+    #     return render_template('')- error message
+    
 
 
 @users_blueprint.route('/<id>', methods=['POST'])
+@login_required
 def update(id):
-    pass
+    user = User[id]
+    if current_user == user:
+        user.full_name = request.form.get('full_name')
+        user.username = request.form.get('username')
+        user.email = request.form.get('email')
+        user.password = request.form.get('password')
+        # check hash
+        # if true
+        
+        print ('updated')
+        if user.save():
+            flash("Successfully updated", 'success')
+            return redirect(url_for('users.edit', id=id))
+        else:
+            flash(user.errors)
+            # flash("Unable to update profile", 'danger')
+            return render_template('users/edit.html', user=user)
+
+  

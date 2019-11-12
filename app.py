@@ -12,6 +12,9 @@ app = Flask('NEXTAGRAM', root_path=web_dir)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "sessions.new"
+login_manager.login_message = "Please login before proceeding."
+login_manager.login_message_category = "warning"
 
 if os.getenv('FLASK_ENV') == 'production':
     app.config.from_object("config.ProductionConfig")

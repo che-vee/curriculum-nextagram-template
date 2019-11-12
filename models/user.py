@@ -37,9 +37,4 @@ class User(UserMixin, BaseModel):
         else: 
             self.password = generate_password_hash(self.password)
 
-def is_authenticated(self):
-        return True
-    
-def is_active(self):
-        return True
     
