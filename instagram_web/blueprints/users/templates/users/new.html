@@ -4,7 +4,7 @@
   <div class="col-md-4">
     <div class="card">
       <header class="card-header">
-        <a href="" class="float-right btn btn-outline-primary mt-1">Log in</a>
+        <a href="{{ url_for('sessions.new') }}" class="float-right btn btn-outline-primary mt-1">Log in</a>
         <h4 class="card-title mt-2">Sign up</h4>
       </header>
       <article class="card-body">
@@ -53,7 +53,7 @@
       </article>
       <!-- card-body end .// -->
       <div class="border-top card-body text-center">
-        Have an account? <a href="">Log In</a>
+        Have an account? <a href="{{ url_for('sessions.new') }}">Log In</a>
       </div>
     </div>
     <!-- card.// -->

@@ -3,13 +3,20 @@ import re
 from werkzeug.security import generate_password_hash
 
 from models.base_model import BaseModel
+from flask_login import UserMixin
 
 
-class User(BaseModel):
+class User(UserMixin, BaseModel):
     full_name = pw.CharField()
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password = pw.CharField()
+
+    def is_authenticated(self):
+        return True
+    
+    def is_active(self):
+        return True
     
     # server side validation for user
     def validate(self):
@@ -29,4 +36,10 @@ class User(BaseModel):
             self.errors.append('Password must be at least 6 characters.\nPassword must contain capital letter.\nPassword must have one special character')
         else: 
             self.password = generate_password_hash(self.password)
+
+def is_authenticated(self):
+        return True
+    
+def is_active(self):
+        return True
     
