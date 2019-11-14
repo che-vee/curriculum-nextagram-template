@@ -10,9 +10,13 @@
         </h4>
       </header>
       <article class="card-body">
+        <!-- from aws tutorial -->
+
+        <!--  -->
         <form
-          action="{{url_for('users.update', id=current_user)}}"
+          action="{{url_for('users.upload_profile_image', id=current_user)}}"
           method="POST"
+          enctype="multipart/form-data"
         >
           <input
             name="csrf_token"
@@ -27,20 +31,35 @@
               alt="Preview Image"
               width="200"
               height="200"
-            />
+            /><br />
+
             <div class="browse-button">
-              <i class="fa fa-pencil-alt"></i>
               <input
                 class="browse-input"
                 type="file"
-                name="UploadedFile"
-                id="UploadedFile"
+                name="user_file"
+                id="user-file"
               />
             </div>
-            <span class="Error"></span>
           </div>
           <br />
-
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Upload profile picture
+            </button>
+          </div>
+        </form>
+        <br />
+        <form
+          action="{{url_for('users.update', id=current_user)}}"
+          method="POST"
+        >
+          <input
+            name="csrf_token"
+            type="hidden"
+            value="{{ csrf_token() }}"
+            class="form-control"
+          />
           <div class="form-row">
             <div class="col form-group">
               <label for="full_name">Full Name:</label>
@@ -90,7 +109,7 @@
 
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">
-              Save Changes
+              Update profile
             </button>
           </div>
         </form>

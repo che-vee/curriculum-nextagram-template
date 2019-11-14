@@ -14,6 +14,7 @@ csrf = CSRFProtect(app)
 
 app.register_blueprint(users_blueprint, url_prefix="/users")
 app.register_blueprint(sessions_blueprint, url_prefix="/sessions")
+# app.register_blueprint(images_blueprint, url_prefix="/images")
 
 @app.errorhandler(500)
 def internal_server_error(e):

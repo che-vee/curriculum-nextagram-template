@@ -4,19 +4,25 @@ from werkzeug.security import generate_password_hash
 
 from models.base_model import BaseModel
 from flask_login import UserMixin
-
+from playhouse.hybrid import hybrid_property
+from config import Config
 
 class User(UserMixin, BaseModel):
     full_name = pw.CharField()
     username = pw.CharField(unique=True)
     email = pw.CharField(unique=True)
     password = pw.CharField()
+    profile_image = pw.CharField(default=Config.DEFAULT_IMAGE)
 
     def is_authenticated(self):
         return True
     
     def is_active(self):
         return True
+
+    @hybrid_property
+    def profile_image_url(self):
+        return 'https://' + Config.S3_LOCATION + self.profile_image
     
     # server side validation for user
     def validate(self):

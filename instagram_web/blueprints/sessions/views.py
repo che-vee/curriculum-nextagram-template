@@ -33,8 +33,8 @@ def create():
             flash('Login unsuccesful. Please check username & password.', 'danger')
             return render_template('sessions/new.html', username=username)
     else:
-        flash('User does not exsist.')
-        return render_template('sessions/new.html', 'danger', username=username)
+        flash('User does not exsist.', 'danger')
+        return render_template('sessions/new.html', username=username)
 
 
 @sessions_blueprint.route('/logout', methods=['GET'])

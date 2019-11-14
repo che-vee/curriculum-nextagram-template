@@ -1,0 +1,55 @@
+{% extends '_layout.html'%} {% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <div class="card">
+      <header class="card-header">
+        <a href="" class="float-right btn btn-outline-primary">Save Changes</a>
+        <h4 class="card-title mt-2">
+          Upload Image
+        </h4>
+      </header>
+      <article class="card-body">
+        <!-- from aws tutorial -->
+
+        <!--  -->
+        <form
+          action="{{url_for('users.upload_profile_image', id=current_user)}}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input
+            name="csrf_token"
+            type="hidden"
+            value="{{ csrf_token() }}"
+            class="form-control"
+          />
+          <div class="preview text-center">
+            <img
+              class="preview-img"
+              src="http://simpleicon.com/wp-content/uploads/account.png"
+              alt="Preview Image"
+              width="200"
+              height="200"
+            /><br />
+
+            <div class="browse-button">
+              <input
+                class="browse-input"
+                type="file"
+                name="profile_image"
+                id="profile_image"
+              />
+            </div>
+          </div>
+          <br />
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+              Upload profile picture
+            </button>
+          </div>
+        </form>
+      </article>
+    </div>
+  </div>
+</div>
