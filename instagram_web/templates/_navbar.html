@@ -45,7 +45,11 @@
             >Edit My Profile</a
           >
           <a class="dropdown-item" href="">Upload Profile Picture</a>
-          <a class="dropdown-item" href="">Upload Image</a>
+          <a
+            class="dropdown-item"
+            href="{{ url_for('images.new', id=current_user.id ) }}"
+            >Upload Image</a
+          >
         </div>
       </li>
       <li class="nav-item">

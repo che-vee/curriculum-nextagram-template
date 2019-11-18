@@ -6,7 +6,7 @@
       <header class="card-header">
         <a href="" class="float-right btn btn-outline-primary">Save Changes</a>
         <h4 class="card-title mt-2">
-          Upload Image
+          Upload Post
         </h4>
       </header>
       <article class="card-body">
@@ -14,7 +14,7 @@
 
         <!--  -->
         <form
-          action="{{url_for('users.upload_profile_image', id=current_user)}}"
+          action="{{url_for('images.upload_image', id=current_user)}}"
           method="POST"
           enctype="multipart/form-data"
         >
@@ -34,18 +34,13 @@
             /><br />
 
             <div class="browse-button">
-              <input
-                class="browse-input"
-                type="file"
-                name="profile_image"
-                id="profile_image"
-              />
+              <input class="browse-input" type="file" name="image" id="image" />
             </div>
           </div>
           <br />
           <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">
-              Upload profile picture
+              Upload image
             </button>
           </div>
         </form>
@@ -53,3 +48,4 @@
     </div>
   </div>
 </div>
+{% endblock %}

@@ -101,7 +101,6 @@ def upload_profile_image(id):
 	# if there is a file in request & is allowed type
     elif file and allowed_file(file.filename):
         file.filename = secure_filename(file.filename)
-        breakpoint()
         output = upload_file_to_s3(file)
 
         if not output:
