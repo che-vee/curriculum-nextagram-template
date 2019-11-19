@@ -18,7 +18,15 @@
 </div>
 <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
 <div class="d-flex justify-content-between">
-<a href="#" class="btn btn-sm btn-info mr-4">Follow</a>
+<!-- <a href="#" class="btn btn-sm btn-info mr-4">Follow</a> -->
+<div class="col-auto">
+  <form action="{{url_for('users.follow', id=user.id)}}" method="POST">
+   
+      <input name="csrf_token" type="hidden" value= {{csrf_token()}} class="form-control">
+      <input type="hidden" name="idol_id" value="{{user.id}}">
+      <button type="submit" class="btn btn-warning">Follow</a>
+    
+  </form>
 <a href="#" class="btn btn-sm btn-default float-right">Message</a>
 </div>
 </div>
@@ -47,6 +55,7 @@
 </h3>
 
 <hr class="my-4">
+
 <div class="row">
     <div class="col-lg-8 mx-auto">
     
@@ -54,7 +63,7 @@
         
           <div class="card-body pt-0 pt-md-4">
            
-            <img src="{{ image.image_url }}" width="50%" class="ml-lg-5 order-1 order-lg-2">
+            <img src="{{ image.image_url }}" width="50%" class="ml-lg-5 order-1 order-lg-2"><br>
             <button type="submit" class="btn btn-primary">Donate</button>
           </div>
         

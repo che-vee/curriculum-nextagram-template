@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 
 from models.user import User
+from models.relationship import Relationship
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from instagram_web.util.helpers import upload_file_to_s3, allowed_file
@@ -114,4 +115,19 @@ def upload_profile_image(id):
             user.execute()
             flash(f'Successfully uploaded {file.filename}', 'success')
             return redirect(url_for('users.show', username=current_user.username))
+
+
+# follower following relationship section
+@users_blueprint.route('/follow/<id>', methods=['POST'])
+@login_required
+def follow(id):
+    fan_id = current_user.id
+    idol_id = request.form.get('idol_id')
+    idol = User.get_by_id(idol_id)
+
+    follower = Relationship(fan=fan_id, idol=idol_id)
+    follower.save()
+
+    return render_template('users/profile.html')
+
   
