@@ -1,0 +1,1 @@
+web: flask migrate; gunicorn start:app --preload
