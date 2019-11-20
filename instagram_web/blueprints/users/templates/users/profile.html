@@ -20,6 +20,7 @@
 <div class="d-flex justify-content-between">
 <!-- <a href="#" class="btn btn-sm btn-info mr-4">Follow</a> -->
 <div class="col-auto">
+  
   <form action="{{url_for('users.follow', id=user.id)}}" method="POST">
    
       <input name="csrf_token" type="hidden" value= {{csrf_token()}} class="form-control">
@@ -27,7 +28,8 @@
       <button type="submit" class="btn btn-warning">Follow</a>
     
   </form>
-<a href="#" class="btn btn-sm btn-default float-right">Message</a>
+  
+<!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
 </div>
 </div>
 <div class="card-body pt-0 pt-md-4">
