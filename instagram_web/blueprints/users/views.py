@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 
 from models.user import User
+from models.image import Image
 from models.relationship import Relationship
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
@@ -55,7 +56,9 @@ def show(username):
 
 @users_blueprint.route('/', methods=["GET"])
 def index():
-    return "USERS"
+    users = User.select()
+    images = Image.select().where(Image.user << users)
+    return render_template('home.html', users=users, images=images)
 
 
 @users_blueprint.route('/<id>/edit', methods=['GET'])
@@ -121,6 +124,8 @@ def upload_profile_image(id):
 @users_blueprint.route('/follow/<id>', methods=['POST'])
 @login_required
 def follow(id):
+    user = User.select().where(User.id == id).get()
+
     fan_id = current_user.id
     idol_id = request.form.get('idol_id')
     idol = User.get_by_id(idol_id)
@@ -128,6 +133,7 @@ def follow(id):
     follower = Relationship(fan=fan_id, idol=idol_id)
     follower.save()
 
-    return render_template('users/profile.html')
+    flash("Successfully followed", 'success')
+    return render_template('users/profile.html', user=user)
 
   

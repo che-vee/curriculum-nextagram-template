@@ -28,7 +28,7 @@ def create():
 
             login_user(user)
             flash('Successfully logged in!', 'success')
-            return redirect(url_for('sessions.new'))
+            return redirect(url_for('users.index'))
         else:
             
             flash('Login unsuccesful. Please check username & password.', 'danger')

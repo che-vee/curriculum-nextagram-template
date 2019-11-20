@@ -1,12 +1,33 @@
-{% extends "_layout.html" %}
+{% extends "_layout.html" %} {% block title %} Homepage {% endblock %} {% block
+header %} {% endblock %} {% block content %}
+<div class="container">
+  <div class="row text-center">
+    <!-- Team item -->
+    {% for user in users %}
+    <div class="col-xl-3 col-sm-6 mb-5">
+      <div class="bg-white rounded shadow-sm py-5 px-4">
+        <img
+          src="{{ user.profile_image_url }}"
+          alt=""
+          width="100px"
+          height="100px"
+          class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"
+        />
+        <h5 class="mb-0">{{ user.username }}</h5>
+        <a
+          class="btn btn-link"
+          href="{{ url_for ('users.show', username = user.username) }}"
+          ><span class="small text-uppercase text-muted">SEE MORE</span></a
+        >
 
-{% block title %}
-  Homepage
-{% endblock %}
-
-{% block header %}
-{% endblock %}
-
-{% block content %}
-  <h1>Homepage</h1>
+        {% for image in user.images[:1] %}
+        <div style="margin-top: 10px">
+          <img src="{{ image.image_url }}" alt="" class="img-fluid" />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

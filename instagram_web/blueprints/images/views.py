@@ -38,7 +38,15 @@ def upload_image(id):
             image = Image(filename=output, user=user)
             image.save()
             flash(f'Successfully uploaded {file.filename}', 'success')
-            return redirect(url_for('images.new'))
+            return redirect(url_for('users.show', username=user.username))
+
+
+@images_blueprint.route('/<id>/delete', methods=['POST'])
+@login_required
+def destory(id):
+    image = Image.get_by_id(id)
+    image.delete_instance()
+    return redirect(url_for('images.show'))
   
 
 @images_blueprint.route('/<id>', methods=['GET'])

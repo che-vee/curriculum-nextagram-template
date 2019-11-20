@@ -16,7 +16,7 @@
     <ul class="navbar-nav mr-auto">
       {% if current_user.is_authenticated %}
       <li class="nav-item active">
-        <a class="nav-link" href="">Home </a>
+        <a class="nav-link" href="{{ url_for('users.index')}}">Home </a>
       </li>
 
       <li class="nav-item">
@@ -44,7 +44,6 @@
             href="{{ url_for('users.edit', id=current_user.id ) }}"
             >Edit My Profile</a
           >
-          <a class="dropdown-item" href="">Upload Profile Picture</a>
           <a
             class="dropdown-item"
             href="{{ url_for('images.new', id=current_user.id ) }}"
